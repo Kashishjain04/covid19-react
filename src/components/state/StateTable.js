@@ -224,7 +224,9 @@ const HomeTable = ({ data }) => {
                       {district[1]?.delta?.confirmed?.toLocaleString("en-IN")}
                     </p>
                     <p>
-                      {district[1]?.total?.confirmed?.toLocaleString("en-IN")}
+                      {district[1]?.total?.confirmed
+                        ? district[1]?.total?.confirmed?.toLocaleString("en-IN")
+                        : "-"}
                     </p>
                   </div>
                 </td>
@@ -262,7 +264,9 @@ const HomeTable = ({ data }) => {
                       {district[1]?.delta?.recovered?.toLocaleString("en-IN")}
                     </p>
                     <p>
-                      {district[1]?.total?.recovered?.toLocaleString("en-IN")}
+                      {district[1]?.total?.recovered
+                        ? district[1]?.total?.recovered?.toLocaleString("en-IN")
+                        : "-"}
                     </p>
                   </div>
                 </td>
@@ -278,7 +282,9 @@ const HomeTable = ({ data }) => {
                       {district[1]?.delta?.deceased?.toLocaleString("en-IN")}
                     </p>
                     <p>
-                      {district[1]?.total?.deceased?.toLocaleString("en-IN")}
+                      {district[1]?.total?.deceased
+                        ? district[1]?.total?.deceased?.toLocaleString("en-IN")
+                        : "-"}
                     </p>
                   </div>
                 </td>
@@ -303,9 +309,12 @@ const HomeTable = ({ data }) => {
                       )}
                     </p>
                     <p>
-                      {formatNum(district[1]?.total?.tested, 1)?.toLocaleString(
-                        "en-IN"
-                      )}
+                      {district[1]?.total?.tested
+                        ? formatNum(
+                            district[1]?.total?.tested,
+                            1
+                          )?.toLocaleString("en-IN")
+                        : "-"}
                     </p>
                   </div>
                 </td>
@@ -324,10 +333,12 @@ const HomeTable = ({ data }) => {
                       )?.toLocaleString("en-IN")}
                     </p>
                     <p>
-                      {formatNum(
-                        district[1]?.total?.vaccinated1,
-                        1
-                      )?.toLocaleString("en-IN")}
+                      {district[1]?.total?.vaccinated1
+                        ? formatNum(
+                            district[1]?.total?.vaccinated1,
+                            1
+                          )?.toLocaleString("en-IN")
+                        : "-"}
                     </p>
                   </div>
                 </td>
@@ -346,10 +357,12 @@ const HomeTable = ({ data }) => {
                       )?.toLocaleString("en-IN")}
                     </p>
                     <p>
-                      {formatNum(
-                        district[1]?.total?.vaccinated2,
-                        1
-                      )?.toLocaleString("en-IN")}
+                      {district[1]?.total?.vaccinated2
+                        ? formatNum(
+                            district[1]?.total?.vaccinated2,
+                            1
+                          )?.toLocaleString("en-IN")
+                        : "-"}
                     </p>
                   </div>
                 </td>

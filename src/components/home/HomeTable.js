@@ -213,7 +213,7 @@ const HomeTable = ({ data }) => {
             return (
               state[0] !== "TT" && (
                 <tr
-                  onClick={() => router.push(`/${state[0]}`)}
+                  onClick={() => router.push(`/state/${state[0]}`)}
                   key={index}
                   className="cursor-pointer"
                 >

@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import Dashboard from "../components/Dashboard";
-import StateTable from "../components/state/StateTable";
-import Vaccinated from "../components/Vaccinated";
-import { fetcher } from "../utils/commonFunctions";
-import { HISTORY_DATA, LATEST_DATA, STATE_CODES } from "../utils/constants";
+import Dashboard from "../../components/Dashboard";
+import StateTable from "../../components/state/StateTable";
+import Vaccinated from "../../components/Vaccinated";
+import { fetcher } from "../../utils/commonFunctions";
+import { HISTORY_DATA, LATEST_DATA, STATE_CODES } from "../../utils/constants";
 
 const StatePage = ({ latestData, historyData }) => {
   const router = useRouter();
@@ -33,7 +33,7 @@ const StatePage = ({ latestData, historyData }) => {
             className="object-contain h-16 sm:h-20"
           />
           <h1
-            className="text-3xl sm:text-5xl"
+            className="text-3xl sm:text-5xl max-w-[15rem] sm:max-w-screen-sm"
             style={{ fontFamily: "Pacifico" }}
           >
             {STATE_CODES[state]}

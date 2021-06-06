@@ -1,0 +1,6 @@
+.table {
+  background-color: #ccc;
+}
+.table > thead > tr > th {
+  margin: 0.25rem;
+}

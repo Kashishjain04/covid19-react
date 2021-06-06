@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+}
+
+@layer base {
+  .table-head th,
+  .table-body td,
+  .table-body th {
+    @apply p-[2px] bg-white rounded-md;
+  }
+  .table-head th > div {
+    @apply h-full grid place-items-center bg-gray-200 p-3 rounded-md relative cursor-pointer;
+  }
+  .table-body td > div,
+  .table-body td > p {
+    @apply h-full px-2 flex flex-col justify-center items-end rounded-md text-right;
+  }
+  .table-body td > div > .delta {
+    @apply text-xs grid grid-cols-2 items-center;
+  }
+}

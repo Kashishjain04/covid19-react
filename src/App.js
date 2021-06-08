@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import { Suspense } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./pages/Home";
+import State from "./pages/State";
+import Loading from "./pages/Loading";
 
 function App() {
   return (
-    <div className="text-center">
-      <header className="bg-[#282c34] min-h-screen flex flex-col items-center justify-center text-white text-xl">
-        <img src={logo} className="h-[40vmin] pointer-events-none my-10 animate-pulse" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="text-[#61dafb] my-5"
-          href="https://tailwindcss.com/docs"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Tailwind
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={Loading}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/state/:stateCode" exact component={State} />
+        </Switch>
+      </BrowserRouter>
+    </Suspense>
   );
 }
 

@@ -34,7 +34,7 @@ export const getActive = (data) => {
 };
 
 export const formatDate = (date) => {
-  return new Date(date + "GMT+0530").toISOString().split("T")[0];
+  return new Date(date).toISOString().split("T")[0];
 };
 
 export const formatHistoryData = (data, date) => {

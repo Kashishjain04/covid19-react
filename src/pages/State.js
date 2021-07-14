@@ -39,6 +39,9 @@ const State = () => {
     suspense: true,
   }).data;
 
+  console.log(latest);
+  console.log(history);
+
   const [data, setData] = useState(latest?.[stateCode]);
 
   useEffect(() => {

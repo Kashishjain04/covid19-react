@@ -8,12 +8,21 @@ import { formatDate } from "../utils/commonFunctions";
 const DatePick = () => {
   const dispatch = useDispatch(),
     date = useSelector(selectDate);
+  const getDate = () => {
+    return (
+      new Date(date).getDate() +
+      "-" +
+      (new Date(date).getMonth() + 1) +
+      "-" +
+      new Date(date).getFullYear()
+    );
+  };
 
   const Calander = ({ onClick }) => {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-10 w-10 cursor-pointer p-2 rounded-full hover:bg-gray-200"
+        className="h-10 w-10 cursor-pointer p-2 hover:rounded-full hover:bg-gray-200 mx-auto"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -30,7 +39,7 @@ const DatePick = () => {
   };
 
   return (
-    <div className="absolute top-5 right-5">
+    <div className="absolute top-5 right-5 grid place-items-center">
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <DatePicker
           disableFuture
@@ -41,6 +50,7 @@ const DatePick = () => {
           onChange={(val) => dispatch(changeDate(formatDate(val)))}
         />
       </MuiPickersUtilsProvider>
+      <p>{getDate()}</p>
     </div>
   );
 };

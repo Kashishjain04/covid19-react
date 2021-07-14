@@ -9,12 +9,14 @@ const Vaccinated = ({ population, v1, v2 }) => {
   );
 
   const setV1 = () => {
-    const num = isNaN(v1per) ? "-" : v1per;
-    setDisplay(`Atleast one dose: ${num}%`);
+    const num = isNaN(v1per) ? "-" : v1per,
+    v = isNaN(v1) ? "-" : v1.toLocaleString("en-IN");
+    setDisplay(`Partially Vaccinated: ${num}% (${v})`);
   };
   const setV2 = () => {
-    const num = isNaN(v2per) ? "-" : v2per;
-    setDisplay(`Fully Vaccinated: ${num}%`);
+    const num = isNaN(v2per) ? "-" : v2per,
+    v = isNaN(v2) ? "-" : v2.toLocaleString("en-IN");
+    setDisplay(`Fully Vaccinated: ${num}% (${v})`);
   };
   const setDefault = () => {
     const num = isNaN(v1 + v2) ? "-" : v1 + v2;

@@ -1,6 +1,6 @@
 const DashCard = ({ title, color, delta, total }) => {
   return (
-    <div className="grid grid-rows-3 m-3 sm:m-5 py-4 place-items-center font-semibold rounded-lg">
+    <div className="grid grid-rows-3 m-3 sm:m-5 py-4 place-items-center font-semibold rounded-lg  border">
       <p className="uppercase text-sm" style={{ color: `rgb(${color})` }}>
         {title}
       </p>

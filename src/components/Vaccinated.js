@@ -1,5 +1,5 @@
 import { formatNum } from "../utils/commonFunctions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Vaccinated = ({ population, v1, v2 }) => {
   const v1per = formatNum((v1 / population) * 100, 1),
@@ -20,6 +20,8 @@ const Vaccinated = ({ population, v1, v2 }) => {
     const num = isNaN(v1 + v2) ? "-" : v1 + v2;
     setDisplay(num.toLocaleString("en-IN") + " vaccine doses administered");
   };
+
+  useEffect(() => {}, [v1, v2]);
 
   return (
     <div className="mx-3 sm:mx-5 mb-4">

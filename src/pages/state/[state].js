@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Dashboard from "../../components/Dashboard";
+import DatePick from "../../components/DatePick";
 import StateTable from "../../components/state/StateTable";
 import Vaccinated from "../../components/Vaccinated";
 import { fetcher } from "../../utils/commonFunctions";
@@ -27,6 +28,7 @@ const StatePage = ({ latestData, historyData }) => {
         <link rel="icon" href={`/logo.png`} />
       </Head>
       <main className="pt-8 mx-auto max-w-screen-xl">
+        <DatePick />
         <div className="bg-white mx-auto flex items-center w-max px-4 py-1 sm:px-6 sm:py-2 rounded-lg  mb-8">
           <img
             src={`/assets/maps/${state}.png`}

@@ -1,12 +1,21 @@
 import Head from "next/head";
 import useSWR from "swr";
 import Dashboard from "../components/Dashboard";
-import { fetcher } from "../utils/commonFunctions";
+import {
+  fetcher,
+  formatDate,
+  formatHistoryData,
+} from "../utils/commonFunctions";
 import { HISTORY_DATA, LATEST_DATA } from "../utils/constants";
 import HomeTable from "../components/home/HomeTable";
 import Vaccinated from "../components/Vaccinated";
+import DatePick from "../components/DatePick";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectDate } from "../redux/dateSlice";
 
 export default function Home({ latestData, historyData }) {
+  const date = useSelector(selectDate);
   const latest = useSWR(LATEST_DATA, fetcher, {
     initialData: latestData,
     refreshInterval: 100,
@@ -15,6 +24,20 @@ export default function Home({ latestData, historyData }) {
     initialData: historyData,
     refreshInterval: 100,
   }).data;
+
+  const [data, setData] = useState(latest["TT"]),
+    [tableData, setTableData] = useState(latest);
+
+  useEffect(() => {
+    formatHistoryData(history, date);
+    if (date === formatDate(new Date())) {
+      setData(latest["TT"]);
+      setTableData(latest);
+    } else {
+      setData(history["TT"]?.dates?.[date]);
+      setTableData(formatHistoryData(history, date));
+    }
+  }, [date]);
 
   return (
     <div className="min-h-screen">
@@ -35,13 +58,14 @@ export default function Home({ latestData, historyData }) {
             India
           </h1>
         </div>
-        <Dashboard data={latest["TT"]} />
+        <DatePick />
+        <Dashboard data={data} />
         <Vaccinated
           population={latest["TT"]?.meta?.population}
-          v1={latest["TT"]?.total?.vaccinated1}
-          v2={latest["TT"]?.total?.vaccinated2}
+          v1={data.total?.vaccinated1}
+          v2={data.total?.vaccinated2}
         />
-        <HomeTable data={latest} />
+        <HomeTable data={tableData} />
       </main>
     </div>
   );

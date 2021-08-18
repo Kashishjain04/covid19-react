@@ -20,10 +20,10 @@ export const formatNum = (num, digits) => {
       return num >= item.value;
     });
   return (
-    (num / item.value)
+    (num / item?.value)
       .toFixed(digits)
       .replace(rx, "$1")
-      .toLocaleString("en_IN") + item.symbol
+      .toLocaleString("en_IN") + item?.symbol
   );
 };
 
@@ -31,4 +31,16 @@ export const getActive = (data) => {
   const other = data?.other ? data?.other : 0;
   const active = data?.confirmed - data?.recovered - data?.deceased - other;
   return Number.isNaN(active) ? 0 : active;
+};
+
+export const formatDate = (date) => {
+  return new Date(date + "GMT+0530").toISOString().split("T")[0];
+};
+
+export const formatHistoryData = (data, date) => {
+  let newData = Object.entries(data);
+  newData.forEach((state) => {
+    state[1] = state[1].dates[date];
+  });
+  return newData;
 };

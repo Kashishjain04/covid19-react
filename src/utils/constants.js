@@ -1,6 +1,6 @@
 export const HISTORY_DATA =
-  "https://api.covid19india.org/v4/min/timeseries.min.json";
-export const LATEST_DATA = "https://api.covid19india.org/v4/min/data.min.json";
+  "https://data.covid19india.org/v4/min/timeseries.min.json";
+export const LATEST_DATA = "https://data.covid19india.org/v4/min/data.min.json";
 export const COLORS = {
   confirmed: "237,66,66",
   active: "33,127,246",

@@ -1,8 +1,8 @@
-export const fetcher = (url) => {
-  return fetch(url).then((response) => {
-    return response.json();
-  });
-};
+// export const fetcher = (url) => {
+//   return fetch(url).then((response) => {
+//     return response.json();
+//   });
+// };
 
 export const formatNum = (num, digits) => {
   if (!num || !digits) return "";
@@ -48,3 +48,7 @@ export const formatHistoryData = (data, date) => {
   });
   return obj;
 };
+
+export const isToday = (date) => {
+  return date === formatDate(new Date("2021-10-31"))
+}

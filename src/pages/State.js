@@ -1,56 +1,36 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import useSWR from "swr";
 import Dashboard from "../components/Dashboard";
 import DatePick from "../components/DatePick";
 import StateTable from "../components/state/StateTable";
 import Vaccinated from "../components/Vaccinated";
 import { selectDate } from "../redux/dateSlice";
-import { fetcher, formatDate } from "../utils/commonFunctions";
-import { HISTORY_DATA, LATEST_DATA, STATE_CODES } from "../utils/constants";
+import { isToday } from "../utils/commonFunctions";
+import { STATE_CODES } from "../utils/constants";
+import latest from '../utils/sampleLatestData.json';
+import history from '../utils/sampleHistoryData.json';
 import seo from "../utils/seo";
 
 const State = () => {
   const historyHook = useHistory(),
     params = useParams(),
     { stateCode } = params,
-    date = useSelector(selectDate),
-    latestInitial = useRef(),
-    historyInitial = useRef();
+    date = useSelector(selectDate);
 
   useEffect(() => {
     seo({ title: `Covid-19 ${STATE_CODES[stateCode]}` });
-    const fetchInitial = async () => {
-      latestInitial.current = await fetcher(LATEST_DATA);
-      historyInitial.current = await fetcher(HISTORY_DATA);
-    };
-    fetchInitial();
   }, [stateCode]);
-
-  const latest = useSWR(LATEST_DATA, fetcher, {
-    initialData: latestInitial.current,
-    refreshInterval: 100,
-    suspense: true,
-  }).data;
-  const history = useSWR(HISTORY_DATA, fetcher, {
-    initialData: historyInitial.current,
-    refreshInterval: 100,
-    suspense: true,
-  }).data;
-
-  console.log(latest);
-  console.log(history);
 
   const [data, setData] = useState(latest?.[stateCode]);
 
   useEffect(() => {
-    if (date === formatDate(new Date())) {
+    if (isToday(date)) {
       setData(latest?.[stateCode]);
     } else {
       setData(history?.[stateCode]?.dates?.[date]);
     }
-  }, [date, history, latest, stateCode]);
+  }, [date, stateCode]);
 
   return (
     <div className="pt-8 mx-auto max-w-screen-xl min-h-screen">
@@ -89,7 +69,7 @@ const State = () => {
         v1={data?.total?.vaccinated1}
         v2={data?.total?.vaccinated2}
       />
-      {date === formatDate(new Date()) && latest?.[stateCode]?.districts && (
+      {isToday(date) && latest?.[stateCode]?.districts && (
         <StateTable data={latest?.[stateCode]?.districts} />
       )}
     </div>

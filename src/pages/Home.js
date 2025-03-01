@@ -1,53 +1,32 @@
-import useSWR from "swr";
 import Dashboard from "../components/Dashboard";
 import {
-  fetcher,
-  formatDate,
+  isToday,
   formatHistoryData,
 } from "../utils/commonFunctions";
-import { HISTORY_DATA, LATEST_DATA } from "../utils/constants";
 import HomeTable from "../components/home/HomeTable";
 import Vaccinated from "../components/Vaccinated";
 import DatePick from "../components/DatePick";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectDate } from "../redux/dateSlice";
+import latest from '../utils/sampleLatestData.json';
+import history from '../utils/sampleHistoryData.json';
 
 export default function Home() {
-  const date = useSelector(selectDate),
-    latestInitial = useRef(),
-    historyInitial = useRef();
-  useEffect(() => {
-    const fetchInitial = async () => {
-      latestInitial.current = await fetcher(LATEST_DATA);
-      historyInitial.current = await fetcher(HISTORY_DATA);
-    };
-    fetchInitial();
-  }, []);
-
-  const latest = useSWR(LATEST_DATA, fetcher, {
-    initialData: latestInitial.current,
-    refreshInterval: 100,
-    suspense: true,
-  }).data;
-  const history = useSWR(HISTORY_DATA, fetcher, {
-    initialData: historyInitial.current,
-    refreshInterval: 100,
-    suspense: true,
-  }).data;
+  const date = useSelector(selectDate);
 
   const [data, setData] = useState(latest?.["TT"]),
     [tableData, setTableData] = useState(latest);
 
   useEffect(() => {
-    if (date === formatDate(new Date())) {
+    if (isToday(date)) {
       setData(latest?.["TT"]);
       setTableData(latest);
     } else {
       setData(history?.["TT"]?.dates?.[date]);
       setTableData(formatHistoryData(history, date));
     }
-  }, [date, history, latest]);
+  }, [date]);
 
   return (
     <div className="pt-8 mx-auto max-w-screen-xl min-h-screen">

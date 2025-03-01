@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { formatDate } from "../utils/commonFunctions";
 
 const initialState = {
-  date: formatDate(new Date()),
+  date: formatDate(new Date("2021-10-31")),
 };
 
 export const dateSlice = createSlice({

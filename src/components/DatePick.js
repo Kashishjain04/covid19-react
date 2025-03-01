@@ -43,8 +43,8 @@ const DatePick = () => {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <DatePicker
           disableFuture
-          minDate={new Date() - 60 * 24 * 60 * 60 * 1000}
-          showTodayButton
+          maxDate={new Date("2021-10-31")}
+          minDate={new Date("2020-05-19")}
           TextFieldComponent={Calander}
           value={date}
           onChange={(val) => dispatch(changeDate(formatDate(val)))}
